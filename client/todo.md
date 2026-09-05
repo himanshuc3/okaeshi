@@ -1,0 +1,21 @@
+## MVP for the hackathon
+
+- CTAs: 
+    - Made by (himanshu) 
+    - Star on github
+- Flows:
+    - Enter username -> pull github data -> show dep graph -> analyze repos for sponsor using AI & show stats -> Solana pay/verification
+    - Post connecting wallet -> show verified contibution track
+    - Show top contributors
+- Stats:
+    - Repositories scanned
+    - Not scannable (public/forks)
+    - Dependencies mapped
+    - Opensource contributions
+    - Based on MRs/commits
+    - Top languages with percentage in terms of LOC?
+- Good to have:
+    - Color schemes
+    - History based on local storage
+    - Responsive web design
+ 
