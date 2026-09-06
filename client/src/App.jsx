@@ -104,7 +104,10 @@ function App() {
     setLoading(true)
     setError('')
     try {
-      const response = await fetch(`/analyze?username=${encodeURIComponent(requestedUsername)}`)
+      const apiUrl = import.meta.env.VITE_API_URL || ''
+      const response = await fetch(
+        `${apiUrl}/analyze?username=${encodeURIComponent(requestedUsername)}`,
+      )
       const payload = await response.json()
       if (!response.ok) throw new Error(payload.error || 'Unable to analyze this GitHub profile.')
       const normalized = normalizeAnalysis(payload)
