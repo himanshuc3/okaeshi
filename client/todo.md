@@ -18,4 +18,8 @@
     - Color schemes
     - History based on local storage
     - Responsive web design
- 
+
+- UI/UX Elements:
+    - Cursor does 
+    - Transition animations
+    - Svg logo animation???
