@@ -19,6 +19,7 @@ export const NodeEnvs = {
 const EnvVars = jetEnv({
   NodeEnv: (v) => tspo.isValue(NodeEnvs, v),
   Port: num,
+  GithubApiToken: (v) => String(v),
 });
 
 /******************************************************************************

@@ -7,6 +7,12 @@ import path from 'path';
 import Paths from '@src/common/constants/Paths';
 import { RouteError } from '@src/common/utils/route-errors';
 import BaseRouter from '@src/routes/apiRouter';
+import {
+  GithubApiError,
+  getDependencyGraphs,
+  getGithubRepositories,
+  getGithubUser,
+} from './services/github-service';
 
 import EnvVars, { NodeEnvs } from './common/constants/env';
 
@@ -59,6 +65,34 @@ app.use(express.static(staticDir));
 // Nav to users pg by default
 app.get('/', (_: Request, res: Response) => {
   return res.redirect('/users');
+});
+
+app.get('/analyze', async (req: Request, res: Response, next: NextFunction) => {
+  const username = req.query.username;
+  const token = String(EnvVars.GithubApiToken ?? '').trim();
+
+  if (typeof username !== 'string' || username.trim() === '') {
+    return res.status(400).json({ error: 'A username query parameter is required.' });
+  }
+  if (!token) {
+    return res.status(500).json({ error: 'Request not authorized' });
+  }
+
+  try {
+    const normalizedUsername = username.trim();
+    const [user, repositories] = await Promise.all([
+      getGithubUser(normalizedUsername, token),
+      getGithubRepositories(normalizedUsername, token),
+    ]);
+    const dependencyGraphs = await getDependencyGraphs(repositories, token);
+
+    return res.json({ user, repositories, dependencyGraphs });
+  } catch (error) {
+    if (error instanceof GithubApiError) {
+      return res.status(error.statusCode).json({ error: error.message });
+    }
+    return next(error);
+  }
 });
 
 // Redirect to login if not logged in.
