@@ -17,7 +17,7 @@
     "type-check": "tsc -b --noEmit"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=26.8.0"
   },
   "_moduleAliases": {
     "@src": "dist"
