@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
 import logger from 'jet-logger';
@@ -7,14 +8,14 @@ import path from 'path';
 import Paths from '@src/common/constants/Paths';
 import { RouteError } from '@src/common/utils/route-errors';
 import BaseRouter from '@src/routes/apiRouter';
+
+import EnvVars, { NodeEnvs } from './common/constants/env';
 import {
-  GithubApiError,
   getDependencyGraphs,
   getGithubRepositories,
   getGithubUser,
+  GithubApiError,
 } from './services/github-service';
-
-import EnvVars, { NodeEnvs } from './common/constants/env';
 
 /******************************************************************************
                                 Setup
@@ -27,6 +28,7 @@ const app = express();
 // Basic middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: 'https://himanshuc3.github.io' }));
 
 // Show routes called in console during development
 if (EnvVars.NodeEnv === NodeEnvs.DEV) {
@@ -72,7 +74,9 @@ app.get('/analyze', async (req: Request, res: Response, next: NextFunction) => {
   const token = String(EnvVars.GithubApiToken ?? '').trim();
 
   if (typeof username !== 'string' || username.trim() === '') {
-    return res.status(400).json({ error: 'A username query parameter is required.' });
+    return res
+      .status(400)
+      .json({ error: 'A username query parameter is required.' });
   }
   if (!token) {
     return res.status(500).json({ error: 'Request not authorized' });
