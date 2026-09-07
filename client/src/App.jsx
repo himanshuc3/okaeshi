@@ -98,6 +98,8 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
+  console.log('app')
+
   const runAnalysis = async (value) => {
     const requestedUsername = value.trim()
     if (!requestedUsername) return
