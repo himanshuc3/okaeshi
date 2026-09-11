@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Alert,
   Avatar,
@@ -38,6 +38,7 @@ import {
   StarOutlined,
   SunOutlined,
 } from '@ant-design/icons'
+import TextTransition, { presets } from 'react-text-transition'
 import './App.css'
 
 const withIconSize =
@@ -93,6 +94,8 @@ const languageColors = {
   Java: '#b07219',
 }
 
+const headlineActions = ['sponsor', 'contribute', 'explore']
+
 function normalizeAnalysis(payload) {
   const repositories = Array.isArray(payload.repositories) ? payload.repositories : []
   const dependencyGraphs = Array.isArray(payload.dependencyGraphs) ? payload.dependencyGraphs : []
@@ -143,6 +146,15 @@ function App() {
   const [analysis, setAnalysis] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [headlineAction, setHeadlineAction] = useState(0)
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setHeadlineAction((index) => (index + 1) % headlineActions.length)
+    }, 4000)
+
+    return () => window.clearInterval(interval)
+  }, [])
 
   console.log('app')
 
@@ -240,9 +252,55 @@ function App() {
               </div>
             </div>
             <h1>
-              Find open-source projects where your <em>skills, time, or money</em> can make an
-              impact.
+              Find open-source projects to{' '}
+              <em className="headline-action">
+                <TextTransition inline springConfig={presets.wobbly}>
+                  {headlineActions[headlineAction]}
+                </TextTransition>
+              </em>
             </h1>
+            <section className="discovery-grid" aria-label="Ways to give back">
+              <article className="discovery-card discovery-code">
+                <div className="discovery-motif" aria-hidden="true">
+                  <Code2 size={18} />
+                  <Code2 size={13} />
+                  <Code2 size={22} />
+                  <Code2 size={15} />
+                  <Code2 size={11} />
+                </div>
+                <div className="pill-text-container source-code-pro">
+                  <h2>Code</h2>
+                  <p>Contribute your skills and time</p>
+                </div>
+              </article>
+
+              <article className="discovery-card discovery-fund">
+                <div className="discovery-motif" aria-hidden="true">
+                  <CircleDollarSign size={16} />
+                  <CircleDollarSign size={22} />
+                  <CircleDollarSign size={12} />
+                  <CircleDollarSign size={18} />
+                  <CircleDollarSign size={14} />
+                </div>
+                <div className="pill-text-container source-code-pro">
+                  <h2>Fund</h2>
+                  <p>Support projects with Solana</p>
+                </div>
+              </article>
+              <article className="discovery-card discovery-match">
+                <div className="discovery-motif" aria-hidden="true">
+                  <HeartHandshake size={20} />
+                  <HeartHandshake size={13} />
+                  <HeartHandshake size={17} />
+                  <HeartHandshake size={11} />
+                  <HeartHandshake size={23} />
+                </div>
+                <div className="pill-text-container source-code-pro">
+                  <h2>Match</h2>
+                  <p>Get matched to the right projects</p>
+                </div>
+              </article>
+            </section>
             <form
               className="username-form"
               onSubmit={(event) => {
@@ -290,48 +348,6 @@ function App() {
                 </Button>
               </div>
             </form>
-            <section className="discovery-grid" aria-label="Ways to give back">
-              <article className="discovery-card discovery-code">
-                <div className="discovery-motif" aria-hidden="true">
-                  <Code2 size={18} />
-                  <Code2 size={13} />
-                  <Code2 size={22} />
-                  <Code2 size={15} />
-                  <Code2 size={11} />
-                </div>
-                <div className="pill-text-container source-code-pro">
-                  <h2>Code</h2>
-                  <p>Contribute your skills and time</p>
-                </div>
-              </article>
-
-              <article className="discovery-card discovery-fund">
-                <div className="discovery-motif" aria-hidden="true">
-                  <CircleDollarSign size={16} />
-                  <CircleDollarSign size={22} />
-                  <CircleDollarSign size={12} />
-                  <CircleDollarSign size={18} />
-                  <CircleDollarSign size={14} />
-                </div>
-                <div className="pill-text-container source-code-pro">
-                  <h2>Fund</h2>
-                  <p>Support projects with Solana</p>
-                </div>
-              </article>
-              <article className="discovery-card discovery-match">
-                <div className="discovery-motif" aria-hidden="true">
-                  <HeartHandshake size={20} />
-                  <HeartHandshake size={13} />
-                  <HeartHandshake size={17} />
-                  <HeartHandshake size={11} />
-                  <HeartHandshake size={23} />
-                </div>
-                <div className="pill-text-container source-code-pro">
-                  <h2>Match</h2>
-                  <p>Get matched to the right projects</p>
-                </div>
-              </article>
-            </section>
             {error && <Alert className="analysis-error" type="error" showIcon message={error} />}
           </section>
           <footer className="welcome-footer source-code-pro">

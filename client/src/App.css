@@ -893,6 +893,17 @@ h1 {
   font-style: normal;
 }
 
+.headline-action {
+  display: inline-flex;
+  min-width: 5.7ch;
+  vertical-align: baseline;
+}
+
+.headline-action .text-transition {
+  display: inline-flex;
+  min-width: 100%;
+}
+
 .welcome-description {
   max-width: 480px;
   color: #77877e;
@@ -901,7 +912,7 @@ h1 {
 }
 
 .username-form {
-  margin-top: 38px;
+  margin-top: 10px;
 }
 
 .username-form label {
