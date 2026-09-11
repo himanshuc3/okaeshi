@@ -156,7 +156,10 @@ function App() {
         <main className={`welcome-shell ${darkMode ? 'theme-dark' : ''}`}>
           <section className="welcome-content">
             <div className="welcome-header">
-              <div className="brand welcome-brand source-code-pro">OKAESHI</div>
+              <div className="brand welcome-brand source-code-pro">
+                <span>OKAESHI</span>
+                <small>おかえし · giving back</small>
+              </div>
               <div className="welcome-actions">
                 <Space.Compact className="github-action-group">
                   <Button
@@ -207,7 +210,8 @@ function App() {
                 <Input
                   id="github-username"
                   size="large"
-                  prefix={<span className="input-prefix">github.com/</span>}
+                  className="source-code-pro"
+                  prefix={<span className="input-prefix source-code-pro">github.com/</span>}
                   placeholder="your-username"
                   value={username}
                   onChange={(event) => setUsername(event.target.value)}
@@ -226,7 +230,7 @@ function App() {
                 </Button>
               </div>
               <div className="form-meta">
-                <span className="form-note">
+                <span className="form-note source-code-pro">
                   <ShieldCheck size={13} /> Read-only analysis of public repositories
                 </span>
                 <Button
@@ -272,10 +276,12 @@ function App() {
             </section>
             {error && <Alert className="analysis-error" type="error" showIcon message={error} />}
           </section>
-          <footer className="welcome-footer">
+          <footer className="welcome-footer source-code-pro">
             <span>Built for maintainers and supporters</span>
             <span className="footer-dot" />
-            <span>Powered by GitHub data</span>
+            <span>
+              Created by <a href="https://himanshusb.in">himanshuc3</a>
+            </span>
           </footer>
         </main>
       ) : (
