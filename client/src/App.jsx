@@ -20,6 +20,51 @@ import {
   Tooltip,
 } from 'antd'
 import {
+  AppstoreOutlined,
+  ArrowRightOutlined,
+  ArrowUpOutlined,
+  BranchesOutlined,
+  CheckCircleOutlined,
+  CodeOutlined,
+  DashboardOutlined,
+  DollarOutlined,
+  DownOutlined,
+  ExperimentOutlined,
+  HeartOutlined,
+  MoonOutlined,
+  SafetyOutlined,
+  SearchOutlined,
+  SettingOutlined,
+  StarOutlined,
+  SunOutlined,
+} from '@ant-design/icons'
+import './App.css'
+
+const withIconSize =
+  (Icon) =>
+  ({ size, ...props }) => <Icon {...props} style={{ ...props.style, fontSize: size }} />
+
+const SizedIcons = {
+  ArrowRight: withIconSize(ArrowRightOutlined),
+  ArrowUpRight: withIconSize(ArrowUpOutlined),
+  CheckCircle2: withIconSize(CheckCircleOutlined),
+  ChevronDown: withIconSize(DownOutlined),
+  CircleDollarSign: withIconSize(DollarOutlined),
+  Code2: withIconSize(CodeOutlined),
+  GitBranch: withIconSize(BranchesOutlined),
+  HeartHandshake: withIconSize(HeartOutlined),
+  Layers3: withIconSize(AppstoreOutlined),
+  LayoutDashboard: withIconSize(DashboardOutlined),
+  Moon: withIconSize(MoonOutlined),
+  Search: withIconSize(SearchOutlined),
+  Settings2: withIconSize(SettingOutlined),
+  ShieldCheck: withIconSize(SafetyOutlined),
+  Sparkles: withIconSize(ExperimentOutlined),
+  Star: withIconSize(StarOutlined),
+  Sun: withIconSize(SunOutlined),
+}
+
+const {
   ArrowRight,
   ArrowUpRight,
   CheckCircle2,
@@ -37,8 +82,7 @@ import {
   Sparkles,
   Star,
   Sun,
-} from 'lucide-react'
-import './App.css'
+} = SizedIcons
 
 const languageColors = {
   JavaScript: '#f1d84b',

@@ -5,6 +5,7 @@
   - moving cursor animation
   - landing page information?
   - Japanese text glitch???
+  - Autofocus on input
 
 - CTAs:
   - Made by (himanshu)
