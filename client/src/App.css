@@ -972,12 +972,16 @@ h1 {
 }
 
 .pill-text-container {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
+  max-width: 72%;
 }
 
 .discovery-card {
-  min-height: 132px;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -985,46 +989,104 @@ h1 {
   padding: 14px;
   border: 1px solid #dce7dd;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.58);
+  isolation: isolate;
 }
 
-.discovery-icon {
-  flex: 0 0 28px;
-  width: 28px;
-  height: 28px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
+.discovery-card::before {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  content: '';
 }
 
-.discovery-code .discovery-icon {
-  color: #4e946c;
-  background: #e5f2e7;
+.discovery-code::before {
+  background: linear-gradient(125deg, #e4f4e7 0%, #cfe8d7 48%, #b9d8c8 100%);
 }
 
-.discovery-fund .discovery-icon {
-  color: #b9823c;
-  background: #fff0d9;
+.discovery-fund::before {
+  background: linear-gradient(125deg, #fff2d8 0%, #f7ddb4 52%, #edc891 100%);
 }
 
-.discovery-match .discovery-icon {
-  color: #6c88a8;
-  background: #e7eef7;
+.discovery-match::before {
+  background: linear-gradient(125deg, #e9f0fa 0%, #d1dfef 50%, #b8cfe2 100%);
+}
+
+.discovery-motif {
+  position: absolute;
+  inset: -18px -7px -16px 26%;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: rgba(255, 255, 255, 0.52);
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+
+.discovery-motif .anticon {
+  flex: 0 0 auto;
+  animation: discovery-float 5s ease-in-out infinite;
+  filter: drop-shadow(0 4px 5px rgba(57, 91, 70, 0.08));
+}
+
+.discovery-motif .anticon:nth-child(2) {
+  align-self: flex-start;
+  animation-delay: -1.7s;
+}
+
+.discovery-motif .anticon:nth-child(3) {
+  align-self: flex-end;
+  animation-delay: -3.1s;
+}
+
+.discovery-motif .anticon:nth-child(4) {
+  animation-delay: -2.2s;
+}
+
+.discovery-motif .anticon:nth-child(5) {
+  align-self: flex-start;
+  animation-delay: -4s;
+}
+
+@keyframes discovery-float {
+  0%,
+  100% {
+    transform: translate3d(0, 3px, 0) rotate(-4deg);
+  }
+
+  50% {
+    transform: translate3d(0, -7px, 0) rotate(5deg);
+  }
 }
 
 .discovery-card h2 {
-  display: inline;
+  display: inline-block;
   margin: 0 7px 0 0;
-  color: #315646;
+  color: #244b3b;
   font:
     600 13px 'Source Code Pro',
     sans-serif;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.discovery-code h2 {
+  background-image: linear-gradient(110deg, #174d36, #287c56);
+}
+
+.discovery-fund h2 {
+  background-image: linear-gradient(110deg, #7a4011, #b66b1f);
+}
+
+.discovery-match h2 {
+  background-image: linear-gradient(110deg, #244c70, #3d7299);
 }
 
 .discovery-card p {
   display: inline;
   margin: 0;
-  color: #819188;
+  color: #3f5c50;
   font-size: 10px;
   line-height: 1.3;
 }
@@ -1095,15 +1157,42 @@ h1 {
 
 .theme-dark .discovery-card {
   border-color: #40594a;
-  background: rgba(29, 48, 40, 0.72);
+}
+
+.theme-dark .discovery-code::before {
+  background: linear-gradient(125deg, #294b3d 0%, #315b49 52%, #3a6953 100%);
+}
+
+.theme-dark .discovery-fund::before {
+  background: linear-gradient(125deg, #59482e 0%, #765b34 52%, #8b6a3b 100%);
+}
+
+.theme-dark .discovery-match::before {
+  background: linear-gradient(125deg, #30465b 0%, #3e5a72 52%, #4c6b84 100%);
 }
 
 .theme-dark .discovery-card h2 {
   color: #d7e9dc;
 }
 
+.theme-dark .discovery-code h2 {
+  background-image: linear-gradient(110deg, #d4f1dc, #8ed1a7);
+}
+
+.theme-dark .discovery-fund h2 {
+  background-image: linear-gradient(110deg, #ffe6b0, #f2b866);
+}
+
+.theme-dark .discovery-match h2 {
+  background-image: linear-gradient(110deg, #d6e9fb, #91bde0);
+}
+
 .theme-dark .discovery-card p {
-  color: #9caf9f;
+  color: #d0ded3;
+}
+
+.theme-dark .discovery-motif {
+  color: rgba(235, 248, 239, 0.18);
 }
 
 .theme-dark .ant-input {
@@ -1185,5 +1274,11 @@ h1 {
 
   .welcome-footer {
     flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .discovery-motif .anticon {
+    animation: none;
   }
 }

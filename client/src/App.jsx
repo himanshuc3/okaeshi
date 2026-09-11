@@ -292,8 +292,12 @@ function App() {
             </form>
             <section className="discovery-grid" aria-label="Ways to give back">
               <article className="discovery-card discovery-code">
-                <div className="discovery-icon">
+                <div className="discovery-motif" aria-hidden="true">
                   <Code2 size={18} />
+                  <Code2 size={13} />
+                  <Code2 size={22} />
+                  <Code2 size={15} />
+                  <Code2 size={11} />
                 </div>
                 <div className="pill-text-container source-code-pro">
                   <h2>Code</h2>
@@ -302,8 +306,12 @@ function App() {
               </article>
 
               <article className="discovery-card discovery-fund">
-                <div className="discovery-icon">
+                <div className="discovery-motif" aria-hidden="true">
+                  <CircleDollarSign size={16} />
+                  <CircleDollarSign size={22} />
+                  <CircleDollarSign size={12} />
                   <CircleDollarSign size={18} />
+                  <CircleDollarSign size={14} />
                 </div>
                 <div className="pill-text-container source-code-pro">
                   <h2>Fund</h2>
@@ -311,8 +319,12 @@ function App() {
                 </div>
               </article>
               <article className="discovery-card discovery-match">
-                <div className="discovery-icon">
-                  <HeartHandshake size={18} />
+                <div className="discovery-motif" aria-hidden="true">
+                  <HeartHandshake size={20} />
+                  <HeartHandshake size={13} />
+                  <HeartHandshake size={17} />
+                  <HeartHandshake size={11} />
+                  <HeartHandshake size={23} />
                 </div>
                 <div className="pill-text-container source-code-pro">
                   <h2>Match</h2>
