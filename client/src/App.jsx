@@ -285,6 +285,7 @@ function App() {
                     runAnalysis('entropea')
                   }}
                 >
+                  <StarOutlined size={15} />
                   Try a sample
                 </Button>
               </div>
@@ -294,16 +295,17 @@ function App() {
                 <div className="discovery-icon">
                   <Code2 size={18} />
                 </div>
-                <div>
+                <div className="pill-text-container source-code-pro">
                   <h2>Code</h2>
                   <p>Contribute your skills and time</p>
                 </div>
               </article>
+
               <article className="discovery-card discovery-fund">
                 <div className="discovery-icon">
                   <CircleDollarSign size={18} />
                 </div>
-                <div>
+                <div className="pill-text-container source-code-pro">
                   <h2>Fund</h2>
                   <p>Support projects with Solana</p>
                 </div>
@@ -312,7 +314,7 @@ function App() {
                 <div className="discovery-icon">
                   <HeartHandshake size={18} />
                 </div>
-                <div>
+                <div className="pill-text-container source-code-pro">
                   <h2>Match</h2>
                   <p>Get matched to the right projects</p>
                 </div>
