@@ -154,7 +154,7 @@ function App() {
         <main className={`welcome-shell ${darkMode ? 'theme-dark' : ''}`}>
           <section className="welcome-content">
             <div className="welcome-header">
-              <div className="brand welcome-brand">okaeshi</div>
+              <div className="brand welcome-brand source-code-pro">OKAESHI</div>
               <div className="welcome-actions">
                 <Button
                   className="star-button"
@@ -175,9 +175,8 @@ function App() {
               </div>
             </div>
             <h1>
-              See where your code
-              <br />
-              <em>can give back.</em>
+              Find open-source projects where your <em>skills, time, or money</em> can make an
+              impact.
             </h1>
             <form
               className="username-form"
@@ -224,6 +223,35 @@ function App() {
                 </Button>
               </div>
             </form>
+            <section className="discovery-grid" aria-label="Ways to give back">
+              <article className="discovery-card discovery-code">
+                <div className="discovery-icon">
+                  <Code2 size={18} />
+                </div>
+                <div>
+                  <h2>Code</h2>
+                  <p>Contribute your skills and time</p>
+                </div>
+              </article>
+              <article className="discovery-card discovery-fund">
+                <div className="discovery-icon">
+                  <CircleDollarSign size={18} />
+                </div>
+                <div>
+                  <h2>Fund</h2>
+                  <p>Support projects with Solana</p>
+                </div>
+              </article>
+              <article className="discovery-card discovery-match">
+                <div className="discovery-icon">
+                  <HeartHandshake size={18} />
+                </div>
+                <div>
+                  <h2>Match</h2>
+                  <p>Get matched to the right projects</p>
+                </div>
+              </article>
+            </section>
             {error && <Alert className="analysis-error" type="error" showIcon message={error} />}
           </section>
           <footer className="welcome-footer">
@@ -236,7 +264,6 @@ function App() {
         <Layout className={`app-shell ${darkMode ? 'theme-dark' : ''}`}>
           <Layout.Sider width={224} className="sidebar" breakpoint="lg" collapsedWidth="0">
             <div className="brand">
-              <div className="brand-mark">o</div>
               <span>okaeshi</span>
             </div>
             <div className="workspace-label">WORKSPACE</div>
