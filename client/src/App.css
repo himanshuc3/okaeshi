@@ -803,8 +803,7 @@ h1 {
   gap: 10px;
 }
 
-.star-button,
-.theme-button {
+.github-star-button {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -813,11 +812,35 @@ h1 {
   background: rgba(255, 255, 255, 0.65);
 }
 
-.theme-button {
-  justify-content: center;
-  width: 38px;
-  height: 38px;
+.github-menu-button {
+  width: 34px;
   padding: 0;
+}
+
+.github-actions-menu {
+  min-width: 174px;
+}
+
+.github-actions-menu .ant-dropdown-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.github-actions-menu .ant-dropdown-menu-title-content a {
+  color: inherit;
+}
+
+.github-actions-menu-dark {
+  background: #24372c;
+}
+
+.github-actions-menu-dark .ant-dropdown-menu-item {
+  color: #d7e9dc;
+}
+
+.github-actions-menu-dark .ant-dropdown-menu-item:hover {
+  background: #334a3d;
 }
 
 .welcome-content {
@@ -1026,8 +1049,8 @@ h1 {
   color: #bad1c0;
 }
 
-.theme-dark .star-button,
-.theme-dark .theme-button,
+.theme-dark .github-star-button,
+.theme-dark .github-menu-button,
 .theme-dark .username-input-row .ant-input-affix-wrapper {
   border-color: #40594a;
   color: #cce1d1;
@@ -1100,7 +1123,7 @@ h1 {
     margin-bottom: 34px;
   }
 
-  .star-button {
+  .github-menu-button {
     font-size: 0;
     gap: 0;
     width: 38px;

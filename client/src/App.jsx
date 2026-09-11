@@ -7,6 +7,7 @@ import {
   Card,
   Col,
   ConfigProvider,
+  Dropdown,
   Input,
   Layout,
   List,
@@ -22,6 +23,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   CheckCircle2,
+  ChevronDown,
   CircleDollarSign,
   Code2,
   GitBranch,
@@ -156,22 +158,38 @@ function App() {
             <div className="welcome-header">
               <div className="brand welcome-brand source-code-pro">OKAESHI</div>
               <div className="welcome-actions">
-                <Button
-                  className="star-button"
-                  href="https://github.com/entropea/okaeshi"
-                  target="_blank"
-                  icon={<Star size={15} />}
-                >
-                  Star on GitHub
-                </Button>
-                <Tooltip title={darkMode ? 'Use light mode' : 'Use dark mode'}>
+                <Space.Compact className="github-action-group">
                   <Button
-                    className="theme-button"
-                    aria-label="Change color scheme"
-                    onClick={() => setDarkMode((value) => !value)}
-                    icon={darkMode ? <Sun size={17} /> : <Moon size={17} />}
-                  />
-                </Tooltip>
+                    className="github-star-button"
+                    href="https://github.com/entropea/okaeshi"
+                    target="_blank"
+                    icon={<Star size={15} />}
+                  >
+                    Star
+                  </Button>
+                  <Dropdown
+                    menu={{
+                      className: darkMode
+                        ? 'github-actions-menu github-actions-menu-dark'
+                        : 'github-actions-menu',
+                      items: [
+                        {
+                          key: 'theme',
+                          icon: darkMode ? <Sun size={15} /> : <Moon size={15} />,
+                          label: darkMode ? 'Use light mode' : 'Use dark mode',
+                          onClick: () => setDarkMode((value) => !value),
+                        },
+                      ],
+                    }}
+                    trigger={['click']}
+                  >
+                    <Button
+                      className="github-menu-button"
+                      aria-label="Open more actions"
+                      icon={<ChevronDown size={14} />}
+                    />
+                  </Dropdown>
+                </Space.Compact>
               </div>
             </div>
             <h1>
@@ -320,15 +338,38 @@ function App() {
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
                 />
-                <Tooltip title={darkMode ? 'Use light mode' : 'Use dark mode'}>
+                <Space.Compact className="github-action-group">
                   <Button
-                    className="theme-button dashboard-theme-button"
-                    type="text"
-                    aria-label="Change color scheme"
-                    onClick={() => setDarkMode((value) => !value)}
-                    icon={darkMode ? <Sun size={17} /> : <Moon size={17} />}
-                  />
-                </Tooltip>
+                    className="github-star-button"
+                    href="https://github.com/entropea/okaeshi"
+                    target="_blank"
+                    icon={<Star size={15} />}
+                  >
+                    Star
+                  </Button>
+                  <Dropdown
+                    menu={{
+                      className: darkMode
+                        ? 'github-actions-menu github-actions-menu-dark'
+                        : 'github-actions-menu',
+                      items: [
+                        {
+                          key: 'theme',
+                          icon: darkMode ? <Sun size={15} /> : <Moon size={15} />,
+                          label: darkMode ? 'Use light mode' : 'Use dark mode',
+                          onClick: () => setDarkMode((value) => !value),
+                        },
+                      ],
+                    }}
+                    trigger={['click']}
+                  >
+                    <Button
+                      className="github-menu-button"
+                      aria-label="Open more actions"
+                      icon={<ChevronDown size={14} />}
+                    />
+                  </Dropdown>
+                </Space.Compact>
                 <Button className="avatar-button" type="text">
                   <Avatar
                     src={user.avatar_url}
