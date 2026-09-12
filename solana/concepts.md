@@ -47,6 +47,158 @@
   - Powered by blockchain
   - It is a protocol
   - Bitcoin doesn't have any tokens (which are different from coins)
+  - Nodes, miner, large miners, mining pool
+  - Monetary policy:
+    - The halving: every 210k transacitions, bitcoin value will reduce, so only 21M bitcoins total.
+    - block frequency: 10 minutes to create a new block
+- How mining works (Nonce):
+  - Transaction -> solve mathematical problem -> miner solved problem first -> miners verify the validy -> block added
+  - The mathematical problem is to generate the hash for the block which has some constraints
+  - We keep changing the value of nonce which is an input into the mathematical problem to reach and satisfy constraints of the hash value
+  - Target: a number used in mining, hash must be below it, adjusts every 2016 blocks (Example target is start hash with 4 '0')
+  - Hexadecimal numbers are used in the hashes
+  - CPU vs GPU vs ASCIs
+- Mining pools:
+  - Would be assymetric based on computation power
+  - Miners can aggregate in a network to coallesce and form a single entity with higher computation power combined
+  - In an coalition, the reward is divided based on the computation power of a single node
+- Nonce range:
+  - There is not enough nonce range to generate valid hash since hash is 16*64 (~10^7) whereas nonce is 32 bit (~4*10^9)
+  - A modest mines does 10^8 hashes/sec, so nonce range will be covered in ~40 seconds
+  - Timestamp is also included as a variable to generate a new hash and therefore more of the subset of hash range could be covered
+  - According to the actual power of machines, hashes based on nonce can be exhausted without the timestamp even changing (sec precision). So, the miners are idling, if we follow this model.
+  - Solution: mempool. It has all the transactions available which needs to be put in the block, which leads to even more hashes that could be generated in that one sec. So we never run out of hashes to generate within a second.
+  - Miners and nodes are different in the network
+
+- Transaction and UTXOs:
+  - UTXO: unspend transactions have a breakdown, where the input BTC would be split between the actual payment and brokerage fees for mining.
+  - Transaction fees
+
+- Cryptocurrency wallets:
+  - Derived value from unused transactions
+
+- Private and public key:
+  - Useful to protect against frauds like farji transactions
+  - Private key + message -> signature
+  - Public key is used for verifying the signature on the message is from a particular user
+  - Bitcoin address is derived through public key and that is shared as an extra layer of security
+
+- Segregated witness
+  - blocks are usually capped at 1MB size
+  - The most amount of space required in a transaction is taken by signature and public key for verification
+  - Due to heavy usage of blockchain, 1MB space for a block created network congestion
+  - We segregated the above 2 verifying values from the transaction block, so block can have more transactions
+
+- Heiracrchical deterministic wallet:
+  - A pattern can be established to target users where a particular address is making a lot of transactions
+  - Fraudsters/scammers can target that particular address or that physical entity itself
+  - New pattern: Master private key -> PrivateK#1 -> PublicK#1 -> Address#1 of wallet
+
+### Ethereum
+
+- Open-source blockchain-based platform (follows a custom protocol)
+- Ethereum nodes:
+  - Types of nodes: full, light and archive
+  - Light node:
+    - not enough computational power
+    - only used for transactions
+    - depends on full node
+    - stores only block header
+  - Archive:
+    - Stores everything kept in the full nodeand built an archive of historical data
+    - Requires terabyes of diskspace
+- Ethereum accounts:
+  - an antity with an ether balance that can send or receive transactions on ethereum
+  - Types of account: Ethernally owned account & contract account
+  - EOA: Wallet is linked to EOA, private key used to open this wallet, send/receive transaction, smart contract interaction
+  - Contract account:
+    - controlled by smart code
+    - No private or public key is needed
+    - Gas is associated
+- Smart contract
+  - program
+  - blockchain is immutable
+  - Kept on ethereum block
+  - Bitcoin uses bitcoin script (not turing complete) but solidity on ethereum (turing complete)
+  - A person who wants to run something on the eth chain, pays for it in gas
+  - Each node has the following: current state of all smart contracts, history of both transaction and contract
+- Dapps:
+  - smart contract + frontend
+  - Trustworthy
+  - No censorship
+  - They pay (how does this even work???)
+  - Can never go down
+- EVM (ethereum virtual machine)
+  - Provides a sandbox environment for running programs and preventing from virus
+- Ethereum gas:
+  - To run smart contract, gas is required (but isn't it similar to pay-as-you-go server deployment)
+  - Each logical operation takes some value: multiplcation - 5, subtraction/equal - 3
+  - Any transaction that modifies the blockchain costs gas.
+  - The user that generated the transaction pays for the gas.
+- Ethereum gas price:
+  - Amount the sender wants to pay per unit of gas to get the transaction mined. gasPrice is set by the sender.
+  - Gas prices are denoted in gwei (1 gwei = 10^-9 ETH)
+  - The higher the gas price the faster the transaction will be mined, similar to transaction fees in bitcoin
+  - Gas limit: maximum gas the transaction can consume, used as a way of preventign against attacks like ddos
+- DAO (Decentralized autonomous organization)
+  - Org working on Smart contracts which seems like the most stupid idea i've ever heard of
+  - Fully democratized
+  - Voting required
+  - Services offered are handled automatically
+  - All activity is transparent
+  - NGO can be built as a smart contract, which publically reveals what would be done with incoming donations and automatically handled
+- The DAO (name of an org) attack
+  - user gives ether to the DAO, the DAO gives back DAO tokens
+  - The DAO was a platform for people to invest in startups
+  - The DAO gives an investment proposal and the folks interested can use the DAO tokens to vote for the proposal
+  - The DAO is attacked using a vulnerability in the program'
+  - Hard fork was accepted as a solution to the vulnerability: chains splitting in ethereum classic and ethereum
+- Hard fork:
+  - 1919999 block was the point of split
+  - During a hard fork, software implementing a protocol and its mining procedures is upgraded
+  - One a user upgrades their software, that version rejects all tranasactions from older software, effectively creatign a new breanch of the blockchain.
+  - However, those users who retain the old software continue to process transactions (why is it heading towards centralization again, here we go again)
+  - Happened in Bitcoin also, in block, 476768, because of segwit: split in bitcoin and bitcoin cash
+- Soft fork:
+  - Changes to the protocol, but the end product remains unchanged
+  - Backward-compatible, meaning upgraded nodes can still communicate with the non-upgraded ones
+- ICO:
+  - Like IPO
+  - Give bitcoin/ether in exchange for tokens, instead of equity
+- Ethereum 2.0 / Serenity
+  - Scalability, Security and sustainability
+  - Upgrades: POS for consensus, sharding
+  - POS
+    - Validator instead of miner
+    - Validator needs to deposit some minimum ETH, put as stake
+    - Then, does similar work as miner
+    - System selects a validator, preventing redundant work, at random, with probability of selection directly proportional to ETH at stake
+    - Mobile or laptop are enough is enough to hash a block and computation power is not the currency
+- Sharding:
+  - Network latency for verifying the mined block is correct, since shared with everyone
+  - Split the chain into multiple sub-chains which is easier to verify and validate\
+  - Transactions per second increase
+  - powerful and expensive computers will not be needed
+  - More validators with join
+  - Beacon chain + ethereum mainnet + shard chain
+- Alt coins:
+  - Anything not bitcoin, almost like distros in linux
+
+Example:
+A wants to send -> B (2 ETH)
+What will be the total fees
+A sets the gas price per unit = 100 gwei
+Transaction gas limit = 21000 units
+Total fees will be: gas units(limit)*gasprice per unit
+Total fee will be: 21000*100 = 2,100,000 gwei
+
+Case 2: When gas transaction limit requirement was 21000 units
+A sets limit = 20000 units
+Transaction fails
+The gas wouldn't be returned since it's transferred to the miner anyway
+
+Case 3: If limit is above actual consumption
+The remaining gas is returned
 
 ### Questions?
 
